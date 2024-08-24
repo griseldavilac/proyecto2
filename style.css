@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Variables globales de colores */
+:root {
+  --color-fondo: #f0f8ff;
+  --color-primario: #d297a7;
+  --color-secundario: #ffa07a;
+  --color-texto: #2f4f4f;
+  --color-borde: #dcdcdc;
+  --color-hover: #ff4500;
+  --color-modal-fondo: #fffafa;
+}
+
+/* Estilo base para el cuerpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilo para el encabezado */
+header {
+  background-color: var(--color-primario);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Estilo para el nombre de la tienda */
+header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+  margin: 0;
+}
+
+/* Estilo para el footer */
+footer {
+  background-color: var(--color-primario);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ocultar los modales por defecto */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para el botón de Filtrar */
+#mostrarModal {
+  background-color: var(--color-primario);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#mostrarModal:hover {
+  background-color: var(--color-fondo);
+  transform: translateY(-2px);
+  color: black;
+}
+
+.modal-content {
+  background-color: var(--color-primario);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid var(--color-borde);
+  width: 80%;
+  max-width: 400px;
+  border-radius: 20px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+/* Estilo para los botones dentro del modal */
+.modal-content button {
+  background-color: var(--color-secundario);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 10px;
+}
+/* Efecto hover para los botones dentro del modal */
+.modal-content button:hover {
+  background-color: var(--color-hover);
+  transform: translateY(-2px);
+}
+/* Estilo para el texto del mensaje en la ventana emergente */
+.modal-content p,
+.modal-content label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Ajuste adicional para los inputs dentro del modal */
+.modal-content input[type='text'],
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--color-borde);
+  box-sizing: border-box;
+}
+/*--------------------------------------------------------------------------------------*/
+.close {
+  color: var(--color-texto);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--color-hover);
+  text-decoration: none;
+  cursor: pointer;
+}
+/*-------------------------------------------------------------------------------------------------*/
+
+/* Estilo para la tabla que contiene los productos */
+.tabla-productos {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 0 10px;
+  table-layout: fixed;
+}
+
+/* Estilo para cada fila de la tabla de productos */
+.fila-producto {
+  text-align: center;
+}
+
+/* Estilo para cada celda de producto */
+.celda-producto {
+  padding: 10px;
+  vertical-align: top;
+  border: 1px solid var(--color-borde);
+  width: 16.66%;
+}
+
+/* Estilo para las imágenes de los productos */
+.imagen-producto {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Mantén el efecto hover */
+.celda-producto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 69, 0, 0.2);
+}
+/*-------------------------------------------------------------------------------------*/
+
+/* Estilo para todos los botones que reutiliza el estilo base */
+.boton-estilo {
+  background-color: var(--color-secundario);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 10px 0;
+}
+
+/* Efecto hover para todos los botones */
+.boton-estilo:hover {
+  background-color: var(--color-hover);
+  transform: translateY(-2px);
+}
+
+/* Asegurar que el botón "Volver" esté centrado */
+.volver-btn {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/*------------------------------------------------------------------------*/
+
+.titulo-sugerencia {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  color: var(--color-texto);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/*------------------------------------------------------------------------*/
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 1024px) {
+  .celda-producto {
+    width: 33.33%;
+  }
+}
+
+@media (max-width: 768px) {
+  .celda-producto {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .celda-producto {
+    width: 100%;
+  }
+
+  .imagen-producto {
+    height: 120px;
+  }
+}
