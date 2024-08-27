@@ -104,6 +104,7 @@ footer {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
 }
+
 /* Estilo para los botones dentro del modal */
 .modal-content button {
   background-color: var(--color-secundario);
@@ -119,11 +120,13 @@ footer {
   transition: background-color 0.3s ease, transform 0.3s ease;
   margin-right: 10px;
 }
+
 /* Efecto hover para los botones dentro del modal */
 .modal-content button:hover {
   background-color: var(--color-hover);
   transform: translateY(-2px);
 }
+
 /* Estilo para el texto del mensaje en la ventana emergente */
 .modal-content p,
 .modal-content label {
@@ -146,7 +149,7 @@ footer {
   border: 1px solid var(--color-borde);
   box-sizing: border-box;
 }
-/*--------------------------------------------------------------------------------------*/
+
 .close {
   color: var(--color-texto);
   float: right;
@@ -160,7 +163,6 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
-/*-------------------------------------------------------------------------------------------------*/
 
 /* Estilo para la tabla que contiene los productos */
 .tabla-productos {
@@ -199,7 +201,6 @@ footer {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(255, 69, 0, 0.2);
 }
-/*-------------------------------------------------------------------------------------*/
 
 /* Estilo para todos los botones que reutiliza el estilo base */
 .boton-estilo {
@@ -230,8 +231,7 @@ footer {
   text-align: center;
 }
 
-/*------------------------------------------------------------------------*/
-
+/* Estilo para el título de sugerencias */
 .titulo-sugerencia {
   font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
@@ -239,8 +239,6 @@ footer {
   text-align: center;
   margin-bottom: 20px;
 }
-
-/*------------------------------------------------------------------------*/
 
 /* Responsividad para pantallas más pequeñas */
 @media (max-width: 1024px) {
@@ -262,5 +260,9 @@ footer {
 
   .imagen-producto {
     height: 120px;
+  }
+
+  .celda-producto h3 {
+    display: none; /* Ocultar el nombre del producto */
   }
 }
