@@ -19,53 +19,10 @@
       <h1>SMART STORE</h1>
       <button id="mostrarModal">Filtrar</button>
     </header>
-    <div id="productos-container"></div>
 
-    <div id="modal-filtros" class="modal">
-      <div class="modal-content">
-        <span id="cerrarModal" class="close">&times;</span>
-        <form id="formulario-filtros">
-          <label for="categoria">Categoría:</label>
-          <select id="categoria">
-            <option value="">Seleccionar</option>
-            <option value="ropa">Ropa</option>
-            <option value="electronica">Electrónica</option>
-            <option value="accesorios">Accesorios</option>
-          </select>
-          <br />
-          <label for="precio">Precio máximo:</label>
-          <input type="text" id="precio" placeholder="Ej: 100" />
-          <button type="button" id="aplicarFiltros" class="boton-estilo">
-            Aplicar Filtros
-          </button>
-          <button type="button" id="limpiarFiltros" class="boton-estilo">
-            Limpiar Filtros
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div id="modal-no-stock" class="modal">
-      <div class="modal-content">
-        <span id="cerrarModalNoStock" class="close">&times;</span>
-        <p>Actualmente no tenemos productos en stock.</p>
-        <button id="cerrarMensajeBtn" class="volver-btn">Cerrar</button>
-      </div>
-    </div>
-
-    <div id="modal-error-precio" class="modal">
-      <div class="modal-content">
-        <span id="cerrarModalErrorPrecio" class="close">&times;</span>
-        <p>Error, en Precio máximo, solo están permitidos números.</p>
-      </div>
-    </div>
-
-    <div id="modal-error-categoria" class="modal">
-      <div class="modal-content">
-        <span id="cerrarModalErrorCategoria" class="close">&times;</span>
-        <p>Debes seleccionar una categoría.</p>
-      </div>
-    </div>
+    <main>
+      <section id="productos-container"></section>
+    </main>
 
     <footer>
       <p>&copy; 2024 SMART STORE. Todos los derechos reservados.</p>
