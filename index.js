@@ -77,29 +77,29 @@ const productos = [
 // Función para crear el modal dinámicamente
 function crearModalFiltros() {
   const modalHTML = `
-    <div id="modal-filtros" class="modal">
-      <div class="modal-content">
-        <span id="cerrarModal" class="close">&times;</span>
-        <form id="formulario-filtros">
-          <label for="categoria">Categoría:</label>
-          <select id="categoria">
-            <option value="">Seleccionar</option>
-            <option value="ropa">Ropa</option>
-            <option value="electronica">Electrónica</option>
-            <option value="accesorios">Accesorios</option>
-          </select>
-          <br />
-          <label for="precio">Precio máximo:</label>
-          <input type="text" id="precio" placeholder="Ej: 100" />
-          <button type="button" id="aplicarFiltros" class="boton-estilo">
-            Aplicar Filtros
-          </button>
-          <button type="button" id="limpiarFiltros" class="boton-estilo">
-            Limpiar Filtros
-          </button>
-        </form>
+      <div id="modal-filtros" class="modal">
+          <div class="modal-content">
+              <span id="cerrarModal" class="close">&times;</span>
+              <form id="formulario-filtros">
+                  <label for="categoria">Categoría:</label>
+                  <select id="categoria">
+                      <option value="">Seleccionar</option>
+                      <option value="ropa">Ropa</option>
+                      <option value="electronica">Electrónica</option>
+                      <option value="accesorios">Accesorios</option>
+                  </select>
+                  <br />
+                  <label for="precio">Precio máximo:</label>
+                  <input type="text" id="precio" placeholder="Ej: 100" />
+                  <button type="button" id="aplicarFiltros" class="boton-estilo">
+                      Aplicar Filtros
+                  </button>
+                  <button type="button" id="limpiarFiltros" class="boton-estilo">
+                      Limpiar Filtros
+                  </button>
+              </form>
+          </div>
       </div>
-    </div>
   `
   document.body.insertAdjacentHTML('beforeend', modalHTML)
 
@@ -110,12 +110,12 @@ function crearModalFiltros() {
 // Función para crear los demás modales de mensajes de error y "no stock"
 function crearModalesMensajes() {
   const modalesMensajesHTML = `
-    <div id="modal-error-precio" class="modal">
-      <div class="modal-content">
-        <span id="cerrarModalErrorPrecio" class="close">&times;</span>
-        <p>Error, en Precio máximo, solo están permitidos números.</p>
+      <div id="modal-error-precio" class="modal">
+          <div class="modal-content">
+              <span id="cerrarModalErrorPrecio" class="close">&times;</span>
+              <p>Error, en Precio máximo, solo están permitidos números.</p>
+          </div>
       </div>
-    </div>
   `
   document.body.insertAdjacentHTML('beforeend', modalesMensajesHTML)
 
@@ -130,8 +130,9 @@ function crearModalesMensajes() {
 // Función para pintar los productos en la página principal
 function pintarProductos(
   filtrados = productos,
-  mostrarPrecio = false,
-  esSugerencia = false
+  mostrarPrecio = true,
+  esSugerencia = false,
+  mostrarVolver = false
 ) {
   const contenedorProductos = document.getElementById('productos-container')
   contenedorProductos.innerHTML = '' // Limpiamos el contenedor para que los productos se puedan pintar nuevamente
@@ -144,46 +145,34 @@ function pintarProductos(
     contenedorProductos.appendChild(tituloSugerencia)
   }
 
-  // Creamos la tabla donde se mostrarán los productos
-  const tablaProductos = document.createElement('table')
-  tablaProductos.classList.add('tabla-productos')
+  // Crear una fila de productos
+  const productosRow = document.createElement('div')
+  productosRow.classList.add('productos-row')
 
-  let filaProducto
-
-  // Recorremos los productos filtrados y creamos una fila para cada 6 productos
-  filtrados.forEach((prod, index) => {
-    if (index % 6 === 0) {
-      filaProducto = document.createElement('tr')
-      filaProducto.className = 'fila-producto'
-      tablaProductos.appendChild(filaProducto)
-    }
-
-    // Creamos una celda para cada producto con su imagen y nombre
-    const celdaProducto = document.createElement('td')
+  // Recorremos los productos filtrados y los mostramos
+  filtrados.forEach((prod) => {
+    // Creamos una celda para cada producto con su imagen, nombre y precio
+    const celdaProducto = document.createElement('div')
     celdaProducto.className = 'celda-producto'
 
-    // Si estamos mostrando los precios (por ejemplo, después de filtrar), los incluimos
     celdaProducto.innerHTML = `
-        <img src="${prod.imagen}" alt="${prod.nombre}" class="imagen-producto">
-        <h3>${prod.nombre}</h3>
-        ${mostrarPrecio ? `<p>Precio: $${prod.precio}</p>` : ''}
+          <img src="${prod.imagen}" alt="${prod.nombre}" class="imagen-producto">
+          <h3>${prod.nombre}</h3>
+          <p>${prod.precio}€</p>
       `
 
-    filaProducto.appendChild(celdaProducto)
+    productosRow.appendChild(celdaProducto)
   })
 
-  // Añadimos la tabla completa al contenedor de productos en el DOM
-  contenedorProductos.appendChild(tablaProductos)
+  // Añadir la fila de productos al contenedor de productos
+  contenedorProductos.appendChild(productosRow)
 
-  // Si se aplicaron filtros o se están mostrando sugerencias, añadimos el botón "Volver"
-  if (mostrarPrecio || esSugerencia) {
-    const btnVolver = document.createElement('button')
-    btnVolver.textContent = 'Volver'
-    btnVolver.className = 'boton-estilo volver-btn' // Reutilizamos los estilos CSS
-    btnVolver.onclick = function () {
-      pintarProductos() // Al hacer clic, volvemos a mostrar todos los productos
-    }
-    contenedorProductos.appendChild(btnVolver)
+  // Mostrar el botón "Volver" solo si es necesario
+  const volverContainer = document.getElementById('volver-container')
+  if (mostrarVolver || esSugerencia) {
+    volverContainer.style.display = 'block'
+  } else {
+    volverContainer.style.display = 'none'
   }
 }
 
@@ -215,9 +204,9 @@ function aplicarFiltros() {
       categoriaSeleccionada,
       precioMaximo
     )
-    pintarProductos(productosSugeridos, true, true) // Mostramos los productos sugeridos
+    pintarProductos(productosSugeridos, true, true, true) // Mostrar el botón "Volver" cuando hay sugerencias
   } else {
-    pintarProductos(productosFiltrados, true) // Mostramos los productos filtrados
+    pintarProductos(productosFiltrados, true, false, true) // Mostrar el botón "Volver" cuando hay productos filtrados
   }
 
   cerrarModal() // Cerramos el modal después de aplicar los filtros
@@ -225,20 +214,25 @@ function aplicarFiltros() {
 
 // Función para sugerir productos cercanos al precio ingresado o de la misma categoría
 function sugerirProductos(categoria, precioMaximo) {
-  let productosSugeridos = productos.filter((producto) => {
-    if (categoria) {
-      return producto.categoria === categoria
-    }
-    return producto.precio > parseFloat(precioMaximo)
+  // Barajamos todos los productos aleatoriamente
+  let productosSugeridos = productos.sort(() => 0.5 - Math.random())
+
+  // Filtramos los productos que son de la misma categoría o tienen un precio mayor al ingresado
+  productosSugeridos = productosSugeridos.filter((producto) => {
+    const coincideCategoria = categoria
+      ? producto.categoria === categoria
+      : true
+    const precioMayor = precioMaximo
+      ? producto.precio > parseFloat(precioMaximo)
+      : true
+    return coincideCategoria && precioMayor
   })
 
-  // Si no hay suficientes productos en la categoría o con precio mayor, tomamos algunos aleatorios
+  // Si no hay suficientes productos que coincidan, tomamos cualquier producto aleatorio
   if (productosSugeridos.length < 3) {
-    productosSugeridos = productos
-      .sort(() => 0.5 - Math.random()) // Barajamos aleatoriamente
-      .slice(0, 3) // Seleccionamos los primeros 3
+    productosSugeridos = productos.sort(() => 0.5 - Math.random()).slice(0, 3)
   } else {
-    productosSugeridos = productosSugeridos.slice(0, 3) // Tomamos los primeros 3 de la lista
+    productosSugeridos = productosSugeridos.slice(0, 3) // Tomamos los primeros 3 productos
   }
 
   return productosSugeridos
@@ -288,6 +282,10 @@ function inicializarInterfaz() {
   document
     .getElementById('limpiarFiltros')
     .addEventListener('click', limpiarFiltros)
+
+  document.getElementById('volverBtn').addEventListener('click', function () {
+    pintarProductos() // Al hacer clic, volvemos a mostrar todos los productos
+  })
 
   pintarProductos() // Pintamos todos los productos inicialmente al cargar la página
 }
