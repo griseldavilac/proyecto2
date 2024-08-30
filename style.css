@@ -24,6 +24,13 @@ body {
   min-height: 100vh;
 }
 
+/* Wrapper para contener header y main */
+#wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Estilo para el encabezado */
 header {
   background-color: var(--color-primario);
@@ -35,6 +42,7 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+
 /* Estilo para el nombre de la tienda */
 header h1 {
   font-family: 'Poppins', sans-serif;
@@ -53,10 +61,9 @@ footer {
   padding: 1rem;
   text-align: center;
   font-size: 1rem;
-  position: relative;
-  bottom: 0;
   width: 100%;
   box-sizing: border-box;
+  margin-top: auto; /* Asegura que el footer esté en la parte inferior */
 }
 
 /* Ocultar los modales por defecto */
@@ -164,27 +171,34 @@ footer {
   cursor: pointer;
 }
 
-/* Estilo para la tabla que contiene los productos */
-.tabla-productos {
-  width: 80%;
-  border-collapse: collapse;
+/* Flexbox para el contenedor de productos */
+#productos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 20px auto;
   max-width: 1200px;
   padding: 0 10px;
-  table-layout: fixed;
 }
 
-/* Estilo para cada fila de la tabla de productos */
-.fila-producto {
-  text-align: center;
+/* Flexbox para las filas de productos */
+.productos-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
 /* Estilo para cada celda de producto */
 .celda-producto {
+  flex: 1 1 16.66%; /* 6 productos por fila en pantallas grandes */
+  box-sizing: border-box;
   padding: 10px;
-  vertical-align: top;
+  margin: 10px;
   border: 1px solid var(--color-borde);
-  width: 16.66%;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
 }
 
 /* Estilo para las imágenes de los productos */
@@ -196,14 +210,43 @@ footer {
   margin-bottom: 10px;
 }
 
-/* Mantén el efecto hover */
+/* Efecto hover */
 .celda-producto:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(255, 69, 0, 0.2);
 }
 
-/* Estilo para todos los botones que reutiliza el estilo base */
-.boton-estilo {
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 1024px) {
+  .celda-producto {
+    flex: 1 1 30%; /* 3 productos por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  .celda-producto {
+    flex: 1 1 45%; /* 2 productos por fila en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .celda-producto {
+    flex: 1 1 100%; /* 1 producto por fila en pantallas muy pequeñas */
+  }
+
+  .imagen-producto {
+    height: 120px;
+  }
+}
+
+/* Estilo del botón Volver */
+#volver-container {
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#volverBtn {
   background-color: var(--color-secundario);
   color: white;
   padding: 10px 20px;
@@ -215,54 +258,9 @@ footer {
   font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
-  margin: 10px 0;
 }
 
-/* Efecto hover para todos los botones */
-.boton-estilo:hover {
+#volverBtn:hover {
   background-color: var(--color-hover);
   transform: translateY(-2px);
-}
-
-/* Asegurar que el botón "Volver" esté centrado */
-.volver-btn {
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-}
-
-/* Estilo para el título de sugerencias */
-.titulo-sugerencia {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.5rem;
-  color: var(--color-texto);
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Responsividad para pantallas más pequeñas */
-@media (max-width: 1024px) {
-  .celda-producto {
-    width: 33.33%;
-  }
-}
-
-@media (max-width: 768px) {
-  .celda-producto {
-    width: 50%;
-  }
-}
-
-@media (max-width: 480px) {
-  .celda-producto {
-    width: 100%;
-  }
-
-  .imagen-producto {
-    height: 120px;
-  }
-
-  .celda-producto h3 {
-    display: none; /* Ocultar el nombre del producto */
-  }
 }
